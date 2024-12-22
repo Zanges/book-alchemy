@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('.static', filename='styles.css') }}">
+</head>
+<body>
+<div class="add-button-container">
+    <a class="add-button add-author" href="/add_author">Add Author</a>
+    <a class="add-button add-book" href="/add_book">Add Book</a>
+    <a class="remove-author-button" href="/remove_author">Remove Author</a>
+</div>
+<div class="sort-container">
+    <form class="sort-form" method="GET" action="/">
+        <label for="sort">Sort By:</label>
+        <select name="sort" id="sort" onchange="this.form.submit()">
+            {% for key, value in sorting_options.items() %}
+                <option value="{{ value }}" {% if value == sort_by %}selected{% endif %}>{{ key }}</option>
+            {% endfor %}
+        </select>
+    </form>
+    <form class="search-form" method="GET" action="/">
+        <label for="search">Search:</label>
+        <input type="text" name="search" id="search">
+        <input type="submit" value="Search">
+    </form>
+</div>
+<h1>Books</h1>
+<ol class="book-list">
+    {% for book in books|sort(attribute=sort_by) %}
+        <li class="book-card">
+            <img src="https://covers.openlibrary.org/b/isbn/{{ book.isbn }}-M.jpg"  alt="{{ book.title }} cover"/>
+            <div class="book-info">
+                <h3>{{ book.title }}</h3>
+                <p>By: <em>{{ book.author.name }}</em></p>
+                <form class="delete-form" action="/book/{{ book.id }}/delete" method="POST">
+                    <input type="submit" value="Delete">
+                </form>
+            </div>
+        </li>
+    {% endfor %}
+</ol>
+{% if not books %}
+    <h2 class="no-books">No books found</h2>
+{% endif %}
+</body>
+</html>

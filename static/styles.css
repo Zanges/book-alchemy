@@ -1,0 +1,121 @@
+/* colors */
+:root {
+    /* Primary Colors */
+    --color-primary: #6C757D; /* Muted gray-blue */
+    --color-primary-bg: #F8F9FA; /* Light gray background */
+
+    /* Secondary Colors */
+    --color-secondary: #ADB5BD; /* Soft gray */
+    --color-secondary-bg: #E9ECEF; /* Very light gray background */
+
+    /* Text Colors */
+    --color-text-primary: #343A40; /* Dark muted gray */
+    --color-text-secondary: #495057; /* Medium muted gray */
+
+    /* Accent Colors (optional for hover or focus states) */
+    --color-accent: #5A6268; /* Slightly darker muted gray-blue */
+    --color-accent-bg: #CED4DA; /* Pale gray background */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--color-primary-bg);
+    color: var(--color-text-primary);
+}
+
+.add-button-container {
+    display: flex;
+    justify-content: stretch;
+    margin-top: 0.2rem;
+
+    a {
+        text-decoration: none;
+        color: var(--color-primary);
+        background-color: var(--color-primary-bg);
+        border: 1px solid var(--color-primary);
+        border-radius: 0.25rem;
+        padding: 0.5rem 1rem;
+        margin: 0.2rem;
+        text-align: center;
+        transition: background-color 0.3s, color 0.3s;
+        width: 100%;
+
+        &:hover, &:focus {
+            background-color: var(--color-primary);
+            color: var(--color-primary-bg);
+        }
+    }
+}
+
+.sort-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem 1rem;
+}
+
+h1 {
+    text-align: center;
+    margin: 1rem;
+}
+
+.book-list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.book-card {
+    background-color: var(--color-secondary-bg);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .book-info {
+        margin-top: auto;
+
+        img {
+            height: auto;
+            max-width: 100%;
+            margin-bottom: 1rem;
+        }
+
+        form {
+            input {
+                width: 100%;
+                padding: 0.2rem;
+                border: 1px solid var(--color-text-secondary);
+                border-radius: 0.4rem;
+                background-color: #711;
+                color: #bbb
+            }
+        }
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: var(--color-text-primary);
+        color: var(--color-primary-bg);
+    }
+
+    .add-button-container a {
+        color: var(--color-secondary-bg);
+        background-color: var(--color-accent);
+        border: 1px solid var(--color-text-primary);
+    }
+
+    .book-card {
+        background-color: var(--color-text-secondary);
+    }
+}
